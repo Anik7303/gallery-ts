@@ -7,7 +7,8 @@ const Form = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem auto;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 `;
 
 const Input = styled.input.attrs({ type: "text" })`
@@ -64,6 +65,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (searchText === "") return;
     onSearch(searchText);
     setSearchText("");
   };
