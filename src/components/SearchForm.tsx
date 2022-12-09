@@ -3,12 +3,15 @@ import styled from "styled-components";
 
 const Form = styled.form`
   width: 100%;
-  /* max-width: 43.75rem; */
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
   margin-bottom: 2rem;
+  padding: 0 1rem;
+  position: sticky;
+  top: 0;
+  left: 0;
 `;
 
 const Input = styled.input.attrs({ type: "text" })`
@@ -67,7 +70,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
     event.preventDefault();
     if (searchText === "") return;
     onSearch(searchText);
-    setSearchText("");
+    // setSearchText("");
   };
 
   return (

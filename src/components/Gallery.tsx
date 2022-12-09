@@ -22,7 +22,7 @@ interface ImageProps {
   alignTo: string;
 }
 
-const Image = styled.img<ImageProps>`
+const StyledImage = styled.img<ImageProps>`
   display: block;
   width: ${(p) => (p.alignTo === "width" ? "100%" : "auto")};
   height: ${(p) => (p.alignTo === "height" ? "100%" : "auto")};
@@ -38,9 +38,9 @@ interface GalleryProps {
 const Gallery: React.FC<GalleryProps> = ({ photos }) => {
   return (
     <Wrapper>
-      {photos.map(({ id, alignTo, description, urls }) => (
-        <ImageContainer key={id}>
-          <Image src={urls.small} alt={description} alignTo={alignTo} />
+      {photos.map(({ id, alignTo, description, urls }, index) => (
+        <ImageContainer key={`${id}_${index}`}>
+          <StyledImage src={urls.small} alt={description} alignTo={alignTo} />
         </ImageContainer>
       ))}
     </Wrapper>

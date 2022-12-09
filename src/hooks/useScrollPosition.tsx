@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 /***
  * Returns current scroll position in y-axis
- * @returns {number} current scroll position in y axis
+ * @returns {[number]} current scroll position in y axis
  */
 function useScrollPosition(): [number] {
   const [position, setPosition] = useState(window.scrollY);
