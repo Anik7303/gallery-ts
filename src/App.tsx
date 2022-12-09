@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import SearchBox from "./components/SearchForm";
 import { Photo } from "./interfaces/Photo";
 import { formatPhotos } from "./utils/photo";
+import Gallery from "./components/Gallery";
 
 interface AppProps {}
 
@@ -85,6 +86,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
   return (
     <Layout>
       <SearchBox onSearch={handleSearch} />
+      <Gallery photos={photos} />
     </Layout>
   );
 };
