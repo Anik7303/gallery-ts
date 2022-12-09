@@ -7,17 +7,7 @@ import { Photo } from "./interfaces/Photo";
 import { formatPhotos } from "./utils/photo";
 import Gallery from "./components/Gallery";
 
-interface AppProps {}
-
 const baseUrl = "https://api.unsplash.com";
-
-interface ParamProps {
-  query: string;
-  page: number;
-  per_page: number;
-  order_by: "latest" | "oldest" | "popular";
-}
-
 const photosPerPage = 30;
 const orderBy = "latest";
 let currentPage = 1;
@@ -27,8 +17,16 @@ const headers = {
   Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API_ACCESS_KEY}`,
 };
 
-const App: React.FC<AppProps> = (props: AppProps) => {
-  // const currentPage = useRef<number>(1);
+interface AppProps {}
+
+interface ParamProps {
+  query: string;
+  page: number;
+  per_page: number;
+  order_by: "latest" | "oldest" | "popular";
+}
+
+const App: React.FC<AppProps> = () => {
   const totalPages = useRef<number>(1000);
   const [photos, setPhotos] = useState<Photo[]>([]);
 
