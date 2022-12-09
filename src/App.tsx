@@ -1,55 +1,33 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 
 import Layout from "./components/Layout";
 import SearchBox from "./components/SearchForm";
 import { Photo } from "./interfaces/Photo";
-import { formatPhotos } from "./utils/photo";
 import Gallery from "./components/Gallery";
+import useScrollPosition from "./hooks/useScrollPosition";
+import { UnsplashAPI } from "./services/unsplash";
 
-const baseUrl = "https://api.unsplash.com";
-const photosPerPage = 30;
-const orderBy = "latest";
 let currentPage = 1;
 
-const headers = {
-  "Accept-Version": "v1",
-  Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API_ACCESS_KEY}`,
-};
-
 interface AppProps {}
-
-interface ParamProps {
-  query: string;
-  page: number;
-  per_page: number;
-  order_by: "latest" | "oldest" | "popular";
-}
 
 const App: React.FC<AppProps> = () => {
   const totalPages = useRef<number>(1000);
   const [photos, setPhotos] = useState<Photo[]>([]);
+  const [scrollPosition] = useScrollPosition();
 
   useEffect(() => {
-    console.log(photos);
-  }, [photos]);
+    console.log(scrollPosition);
+    if (scrollPosition > window.innerHeight / 2) {
+      console.log("half reached");
+    }
+  }, [scrollPosition]);
 
   useEffect(() => {
     const tempFn = async () => {
       try {
-        const url = `${baseUrl}/photos`;
-        const params = {
-          page: currentPage,
-          per_page: photosPerPage,
-          order_by: orderBy,
-        };
-        const response = await axios.get(url, { headers, params });
-
-        if (response.status === 200 && response.data) {
-          console.log(response.data);
-          setPhotos(formatPhotos(response.data));
-          currentPage++;
-        }
+        const data = await UnsplashAPI.getPhotos(currentPage);
+        setPhotos(data);
       } catch (error: unknown) {
         console.error(error);
       }
@@ -60,22 +38,9 @@ const App: React.FC<AppProps> = () => {
   const handleSearch = async (text: string): Promise<void> => {
     try {
       if (currentPage > totalPages?.current) return;
-      const url = `${baseUrl}/search/photos`;
-      const params: ParamProps = {
-        query: text,
-        page: currentPage,
-        per_page: photosPerPage,
-        order_by: orderBy,
-      };
-      const response = await axios.get(url, { headers, params });
-
-      if (response.status === 200 && response.data) {
-        const { total_pages, results } = response.data;
-        totalPages.current = total_pages;
-        setPhotos(formatPhotos(results));
-        currentPage++;
-        console.log(response.data);
-      }
+      const data = await UnsplashAPI.searchPhotos(text, currentPage);
+      setPhotos(data.photos);
+      totalPages.current = data.pages;
     } catch (error: unknown) {
       console.error(error);
     }
