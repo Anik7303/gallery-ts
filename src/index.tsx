@@ -6,12 +6,12 @@ import App from "./App";
 
 const GlobalStyles = createGlobalStyle`
   :root {
-    --white: #f7f7f7;
-    --black: #222222;
-    --gray: #cccccc;
-    --red: #ca0f0f;
-    --primary: #0871b8;
-    --secondary: #07a563;
+    --color-white: #f7f7f7;
+    --color-black: #222222;
+    --color-gray: #cccccc;
+    --color-red: #ca0f0f;
+    --color-primary: #0871b8;
+    --color-secondary: #07a563;
   }
 
   *, *::before, *::after {
@@ -30,7 +30,8 @@ const GlobalStyles = createGlobalStyle`
     min-height: 100vh;
     font-size: 1rem;
     font-weight: 400;
-    background-color: var(--white);
+    background-color: var(--color-white);
+    color: var(--color-black);
   }
 
   #root {
