@@ -16,13 +16,13 @@ const Form = styled.form`
 
 const Input = styled.input.attrs({ type: "text" })`
   flex: 1;
-  background: var(--color-white);
-  color: var(--color-black);
+  background: ${(p) => p.theme.color.white};
+  color: ${(p) => p.theme.color.black};
   font-family: inherit;
   font-size: 1rem;
   font-weight: 400;
   padding: 0.8rem 1.2rem;
-  border: 2px solid var(--color-gray);
+  border: 2px solid ${(p) => p.theme.color.grey};
   border-right: none;
   border-radius: 2rem;
   border-top-right-radius: 0;
@@ -30,7 +30,7 @@ const Input = styled.input.attrs({ type: "text" })`
 
   &:focus {
     outline: none;
-    border-color: var(--color-primary);
+    border-color: ${(p) => p.theme.color.primary};
   }
 `;
 
@@ -39,9 +39,9 @@ const Button = styled.button`
   font-family: inherit;
   font-size: 1rem;
   font-weight: 700;
-  background: var(--color-primary);
-  color: var(--color-white);
-  border: 2px solid var(--color-primary);
+  background: ${(p) => p.theme.color.primary};
+  color: ${(p) => p.theme.color.white};
+  border: 2px solid ${(p) => p.theme.color.primary};
   border-radius: 2rem;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;

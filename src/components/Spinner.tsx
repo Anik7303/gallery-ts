@@ -20,7 +20,7 @@ const Loading = styled.div`
   width: 50px;
   height: 50px;
   border: 6px solid #dddddd;
-  border-right-color: var(--color-primary);
+  border-right-color: ${(p) => p.theme.color.primary};
   border-radius: 50%;
   animation: ${animate} linear 1s infinite;
   position: absolute;
